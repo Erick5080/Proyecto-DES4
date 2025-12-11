@@ -37,7 +37,7 @@ namespace Proyecto1
             catch (Exception ex)
             {
                 MessageBox.Show($"No se pudo cargar el historial. Detalle: {ex.Message}", "Error de Carga", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // Si hay un error, el DataGridView estará vacío, lo cual es manejable.
+                // Si hay un error, el DataGridView estará vacío
             }
         }
     }

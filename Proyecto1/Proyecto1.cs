@@ -28,7 +28,7 @@ namespace Proyecto1
             InitializeComponent();
         }
 
-        // --- Funciones Auxiliares ---
+        // Funciones Auxiliares
         private void concatText(string valor)
         {
             if (isNewNumber || textBox1.Text == "0" || textBox1.Text == "Cannot divide by zero")
@@ -42,7 +42,7 @@ namespace Proyecto1
             }
         }
 
-        // --- Manejadores de Eventos Numéricos y Decimales (Mismo Código) ---
+        // Manejadores de Eventos Numéricos y Decimales
 
         private void button1_Click(object sender, EventArgs e) => concatText("1");
         private void button2_Click(object sender, EventArgs e) => concatText("2");
@@ -71,39 +71,39 @@ namespace Proyecto1
             }
         }
 
-        // --- Manejadores de Eventos de Operadores Aritméticos (Mismo Código) ---
+        // Manejadores de Eventos de Operadores Aritméticos
 
-        private void button11_Click(object sender, EventArgs e) // División ( / )
+        private void button11_Click(object sender, EventArgs e) // División 
         {
             FirstNumber = Convert.ToDecimal(textBox1.Text);
             Operation = "/";
             isNewNumber = true;
         }
 
-        private void btn_por_Click(object sender, EventArgs e) // Multiplicación ( * )
+        private void btn_por_Click(object sender, EventArgs e) // Multiplicación
         {
             FirstNumber = Convert.ToDecimal(textBox1.Text);
             Operation = "*";
             isNewNumber = true;
         }
 
-        private void btn_min_Click(object sender, EventArgs e) // Resta ( - )
+        private void btn_min_Click(object sender, EventArgs e) // Resta 
         {
             FirstNumber = Convert.ToDecimal(textBox1.Text);
             Operation = "-";
             isNewNumber = true;
         }
 
-        private void btn_plus_Click(object sender, EventArgs e) // Suma ( + )
+        private void btn_plus_Click(object sender, EventArgs e) // Suma 
         {
             FirstNumber = Convert.ToDecimal(textBox1.Text);
             Operation = "+";
             isNewNumber = true;
         }
 
-        // --- Botones de Control y Funciones Especiales (Lógica de Guardado Agregada) ---
+        //  Botones de Control y Funciones Especiales
 
-        private void button11_Click_1(object sender, EventArgs e) // Botón CE (Clear Entry)
+        private void button11_Click_1(object sender, EventArgs e) // Botón CE 
         {
             // Solo limpia la entrada, no se guarda en la DB
 
@@ -111,7 +111,7 @@ namespace Proyecto1
             isNewNumber = true;
         }
 
-        private void button12_Click(object sender, EventArgs e) // Botón C (Clear All)
+        private void button12_Click(object sender, EventArgs e) // Botón C
         {
             // Limpia todo, no se guarda en la DB
             textBox1.Text = "0";
@@ -120,7 +120,7 @@ namespace Proyecto1
             isNewNumber = true;
         }
 
-        private void button13_Click(object sender, EventArgs e) // Raíz Cuadrada ( SQRT )
+        private void button13_Click(object sender, EventArgs e) // Raíz Cuadrada
         {
 
             if (decimal.TryParse(textBox1.Text, out decimal number) && number >= 0)
@@ -132,10 +132,10 @@ namespace Proyecto1
                 try
                 {
                     db.InsertarRegistro(
-                        number.ToString(),             // El número original (como string)
-                        "0",                           // Segundo número es 0 (como string)
-                        result_raiz.ToString(),        // Resultado de Raíz Cuadrada (como string)
-                        "0", "0", null                 // Resto de resultados como string
+                        number.ToString(),           
+                        "0",                          
+                        result_raiz.ToString(),       
+                        "0", "0", null                
                     );
                 }
                 catch (Exception ex)

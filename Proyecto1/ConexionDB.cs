@@ -10,7 +10,7 @@ namespace Proyecto1
         private readonly string _connectionString =
              $"Data Source=DESKTOP-HAE2KFA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True;TrustServerCertificate=True;Connection Timeout=60";
 
-        // --- 1. Método para abrir la conexión (Sin cambios) ---
+        // 1. Método para abrir la conexión
         public SqlConnection AbrirConexion()
         {
             try
@@ -26,14 +26,14 @@ namespace Proyecto1
             }
         }
 
-        // --- 2. Método para INSERTAR Registros (MODIFICADO para usar STRING) ---
+        // 2. Método para INSERTAR Registros
         public void InsertarRegistro(
-            string num1,            // Acepta string
-            string num2,            // Acepta string
-            string suma,            // Acepta string
-            string resta,           // Acepta string
-            string multiplicacion,  // Acepta string
-            string division)       // Acepta string?
+            string num1,           
+            string num2,          
+            string suma,            
+            string resta,           
+            string multiplicacion,  
+            string division)      
         {
             string insertQuery = @"
             INSERT INTO registros (
@@ -86,7 +86,7 @@ namespace Proyecto1
             }
         }
 
-        // --- 3. Método para OBTENER Registros (Sin cambios, devuelve DataTable) ---
+        // 3. Método para OBTENER Registros
         public DataTable ObtenerRegistros()
         {
             string selectQuery = "SELECT * FROM registros ORDER BY fecha_operacion DESC";
