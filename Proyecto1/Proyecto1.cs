@@ -161,14 +161,13 @@ namespace Proyecto1
                 decimal result_cuadrado = number * number;
                 textBox1.Text = result_cuadrado.ToString();
 
-                // GUARDAR EN DB: Convertir a STRING para la DB
                 try
                 {
                     db.InsertarRegistro(
-                        number.ToString(),             // El número original (como string)
-                        "0",                           // Segundo número es 0 (como string)
-                        result_cuadrado.ToString(),    // Resultado al Cuadrado (como string)
-                        "0", "0", null                 // Resto de resultados como string
+                        number.ToString(),            
+                        "0",                           
+                        result_cuadrado.ToString(),    
+                        "0", "0", null                 
                     );
                 }
                 catch (Exception ex)
@@ -186,7 +185,7 @@ namespace Proyecto1
             isNewNumber = true;
         }
 
-        // 2. NUEVO MANEJADOR: Abre la ventana de historial al hacer clic en el PictureBox
+        // 2. Abre la ventana de historial al hacer clic en el PictureBox
         private void pictureBoxHistorial_Click(object sender, EventArgs e)
         {
             HistorialForm historial = new HistorialForm(db);
@@ -194,9 +193,9 @@ namespace Proyecto1
         }
 
 
-        // --- Lógica Principal de Cálculo y Guardado (MODIFICADA para enviar strings) ---
+        //  Lógica de Cálculo y Guardado
 
-        private void btn_equal_Click(object sender, EventArgs e) // Botón Igual ( = )
+        private void btn_equal_Click(object sender, EventArgs e) 
         {
             if (Operation == "") return;
 
@@ -226,7 +225,6 @@ namespace Proyecto1
                     if (secondNumber == 0)
                     {
                         textBox1.Text = "Cannot divide by zero";
-                        // NO se llama a db.InsertarRegistro, solo se retorna
                         return;
                     }
                     division = FirstNumber / secondNumber;
@@ -260,8 +258,120 @@ namespace Proyecto1
             isNewNumber = true;
         }
 
-        // --- Eventos por Defecto ---
+
         private void Form1_Load(object sender, EventArgs e) { }
         private void textBox1_TextChanged(object sender, EventArgs e) { }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (Operation == "")
+            {
+                // Si no hay operación, simplemente calcula el 1% del número actual
+                if (decimal.TryParse(textBox1.Text, out decimal number))
+                {
+                    decimal result_solo = number / 100;
+                    textBox1.Text = result_solo.ToString();
+                    FirstNumber = result_solo;
+                }
+                isNewNumber = true;
+                return;
+            }
+
+            if (decimal.TryParse(textBox1.Text, out decimal secondNumber))
+            {
+                decimal result = 0;
+                decimal result_suma = 0, result_resta = 0, result_multiplicacion = 0;
+                string division_guardar = null;
+
+                // 1. Calcula el valor absoluto del porcentaje
+                decimal porcentaje_valor = FirstNumber * (secondNumber / 100);
+
+                // 2. Ejecuta la operación final dependiendo del operador
+                switch (Operation)
+                {
+                    case "+":
+                        
+                        result = result_suma = FirstNumber + porcentaje_valor;
+                        break;
+
+                    case "-":
+                        
+                        result = result_resta = FirstNumber - porcentaje_valor;
+                        break;
+
+                    case "*":
+                        // Multiplica FirstNumber por el valor del porcentaje
+                        result = result_multiplicacion = FirstNumber * (secondNumber / 100);
+                        break;
+
+                    case "/":
+                        // Divide FirstNumber por el valor del porcentaje
+                        if (porcentaje_valor == 0)
+                        {
+                            textBox1.Text = "Cannot divide by zero";
+                            return;
+                        }
+                        result = FirstNumber / porcentaje_valor;
+                        division_guardar = result.ToString();
+                        break;
+                }
+
+                textBox1.Text = result.ToString();
+
+                //  3. GUARDADO EN DB 
+                try
+                {
+                    db.InsertarRegistro(
+                        FirstNumber.ToString(),            
+                        secondNumber.ToString() + " %",     
+                        result_suma.ToString(),             
+                        result_resta.ToString(),            
+                        result_multiplicacion.ToString(),   
+                        division_guardar                    
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al guardar Porcentaje en DB: {ex.Message}", "Error DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                // 4. Reinicia las variables para la siguiente operación
+                FirstNumber = result;
+                Operation = "";
+                isNewNumber = true;
+            }
+        }
+
+        private void btnReciproco_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(textBox1.Text, out decimal number))
+            {
+                if (number == 0)
+                {
+                    textBox1.Text = "Cannot divide by zero";
+                    return;
+                }
+
+                decimal result_reciprocal = 1 / number;
+                textBox1.Text = result_reciprocal.ToString();
+
+                try
+                {
+                    db.InsertarRegistro(
+                        "1",
+                        number.ToString(),
+                        "0", "0", "0",
+                        result_reciprocal.ToString() // Resultado de 1/X
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al guardar Recíproco en DB: {ex.Message}", "Error DB", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                FirstNumber = result_reciprocal;
+            }
+            isNewNumber = true;
+        }
     }
 }

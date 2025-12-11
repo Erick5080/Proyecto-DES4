@@ -6,9 +6,9 @@ namespace Proyecto1
 {
     public class ConexionDB
     {
-        // La cadena de conexión es fija y correcta
+        // La cadena de conexión
         private readonly string _connectionString =
-             $"Data Source=DESKTOP-HAE2KFA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True;TrustServerCertificate=True";
+             $"Data Source=DESKTOP-HAE2KFA\\SQLEXPRESS;Initial Catalog=Proyecto;Integrated Security=True;TrustServerCertificate=True;Connection Timeout=60";
 
         // --- 1. Método para abrir la conexión (Sin cambios) ---
         public SqlConnection AbrirConexion()
@@ -33,7 +33,7 @@ namespace Proyecto1
             string suma,            // Acepta string
             string resta,           // Acepta string
             string multiplicacion,  // Acepta string
-            string? division)       // Acepta string?
+            string division)       // Acepta string?
         {
             string insertQuery = @"
             INSERT INTO registros (

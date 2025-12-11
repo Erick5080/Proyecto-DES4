@@ -49,6 +49,8 @@
             this.button14 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pbHistorial = new System.Windows.Forms.PictureBox();
+            this.btnPercent = new System.Windows.Forms.Button();
+            this.btnReciproco = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbHistorial)).BeginInit();
             this.SuspendLayout();
             // 
@@ -277,19 +279,41 @@
             // pbHistorial
             // 
             this.pbHistorial.Image = global::Proyecto1.Properties.Resources.Historial;
-            this.pbHistorial.Location = new System.Drawing.Point(20, 92);
+            this.pbHistorial.Location = new System.Drawing.Point(20, 97);
             this.pbHistorial.Name = "pbHistorial";
-            this.pbHistorial.Size = new System.Drawing.Size(50, 50);
+            this.pbHistorial.Size = new System.Drawing.Size(50, 45);
             this.pbHistorial.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbHistorial.TabIndex = 21;
             this.pbHistorial.TabStop = false;
             this.pbHistorial.Click += new System.EventHandler(this.pictureBoxHistorial_Click);
+            // 
+            // btnPercent
+            // 
+            this.btnPercent.Location = new System.Drawing.Point(84, 112);
+            this.btnPercent.Name = "btnPercent";
+            this.btnPercent.Size = new System.Drawing.Size(50, 30);
+            this.btnPercent.TabIndex = 22;
+            this.btnPercent.Text = "%";
+            this.btnPercent.UseVisualStyleBackColor = true;
+            this.btnPercent.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // btnReciproco
+            // 
+            this.btnReciproco.Location = new System.Drawing.Point(148, 112);
+            this.btnReciproco.Name = "btnReciproco";
+            this.btnReciproco.Size = new System.Drawing.Size(50, 30);
+            this.btnReciproco.TabIndex = 23;
+            this.btnReciproco.Text = "1/x";
+            this.btnReciproco.UseVisualStyleBackColor = true;
+            this.btnReciproco.Click += new System.EventHandler(this.btnReciproco_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(309, 414);
+            this.Controls.Add(this.btnReciproco);
+            this.Controls.Add(this.btnPercent);
             this.Controls.Add(this.pbHistorial);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button14);
@@ -343,6 +367,8 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.PictureBox pbHistorial;
+        private System.Windows.Forms.Button btnPercent;
+        private System.Windows.Forms.Button btnReciproco;
     }
 }
 
